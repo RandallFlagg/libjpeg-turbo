@@ -36,9 +36,9 @@ if(WIN32)
   endif()
 endif()
 if(MSVC)
-  configure_file(${CMAKE_SOURCE_DIR}/win/jpeg.rc.in
-    ${CMAKE_BINARY_DIR}/win/jpeg.rc)
-  set(JPEG_SRCS ${JPEG_SRCS} ${CMAKE_BINARY_DIR}/win/jpeg.rc)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../win/jpeg.rc.in
+    ${CMAKE_CURRENT_BINARY_DIR}/win/jpeg.rc)
+  set(JPEG_SRCS ${JPEG_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/win/jpeg.rc)
 endif()
 add_library(jpeg SHARED ${JPEG_SRCS} ${DEFFILE} $<TARGET_OBJECTS:simd>
   ${SIMD_OBJS})
@@ -76,23 +76,24 @@ else()
   set(DJPEG_BMP_SOURCES ../wrbmp.c ../wrtarga.c)
 endif()
 
-add_executable(cjpeg ../cjpeg.c ../cdjpeg.c ../rdgif.c ../rdppm.c
-  ../rdswitch.c ${CJPEG_BMP_SOURCES})
-set_property(TARGET cjpeg PROPERTY COMPILE_FLAGS ${COMPILE_FLAGS})
-target_link_libraries(cjpeg jpeg)
+#add_executable(cjpeg ../cjpeg.c ../cdjpeg.c ../rdgif.c ../rdppm.c
+#  ../rdswitch.c ${CJPEG_BMP_SOURCES})
+#set_property(TARGET cjpeg PROPERTY COMPILE_FLAGS ${COMPILE_FLAGS})
+#target_link_libraries(cjpeg jpeg)
 
-add_executable(djpeg ../djpeg.c ../cdjpeg.c ../rdcolmap.c ../rdswitch.c
-  ../wrgif.c ../wrppm.c ${DJPEG_BMP_SOURCES})
-set_property(TARGET djpeg PROPERTY COMPILE_FLAGS ${COMPILE_FLAGS})
-target_link_libraries(djpeg jpeg)
+#add_executable(djpeg ../djpeg.c ../cdjpeg.c ../rdcolmap.c ../rdswitch.c
+#  ../wrgif.c ../wrppm.c ${DJPEG_BMP_SOURCES})
+#set_property(TARGET djpeg PROPERTY COMPILE_FLAGS ${COMPILE_FLAGS})
+#target_link_libraries(djpeg jpeg)
 
-add_executable(jpegtran ../jpegtran.c ../cdjpeg.c ../rdswitch.c ../transupp.c)
-target_link_libraries(jpegtran jpeg)
-set_property(TARGET jpegtran PROPERTY COMPILE_FLAGS "${USE_SETMODE}")
+#add_executable(jpegtran ../jpegtran.c ../cdjpeg.c ../rdswitch.c ../transupp.c)
+#target_link_libraries(jpegtran jpeg)
+#set_property(TARGET jpegtran PROPERTY COMPILE_FLAGS "${USE_SETMODE}")
 
-add_executable(jcstest ../jcstest.c)
-target_link_libraries(jcstest jpeg)
+#add_executable(jcstest ../jcstest.c)
+#target_link_libraries(jcstest jpeg)
 
+#[[
 install(TARGETS jpeg EXPORT ${CMAKE_PROJECT_NAME}Targets
   INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -105,3 +106,4 @@ if(NOT CMAKE_VERSION VERSION_LESS "3.1" AND MSVC AND
   install(FILES "$<TARGET_PDB_FILE:jpeg>"
     DESTINATION ${CMAKE_INSTALL_BINDIR} OPTIONAL)
 endif()
+]]#

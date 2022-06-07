@@ -606,10 +606,10 @@ if(WITH_TURBOJPEG)
       set(TJMAPFILE ${CMAKE_CURRENT_SOURCE_DIR}/turbojpeg-mapfile.jni)
     endif()
     if(MSVC)
-      configure_file(${CMAKE_SOURCE_DIR}/win/turbojpeg.rc.in
-        ${CMAKE_BINARY_DIR}/win/turbojpeg.rc)
+      configure_file(${CMAKE_CURRENT_SOURCE_DIR}/win/turbojpeg.rc.in
+        ${CMAKE_CURRENT_BINARY_DIR}/win/turbojpeg.rc)
       set(TURBOJPEG_SOURCES ${TURBOJPEG_SOURCES}
-        ${CMAKE_BINARY_DIR}/win/turbojpeg.rc)
+        ${CMAKE_CURRENT_BINARY_DIR}/win/turbojpeg.rc)
     endif()
     add_library(turbojpeg SHARED ${TURBOJPEG_SOURCES})
     set_property(TARGET turbojpeg PROPERTY COMPILE_FLAGS
@@ -1479,6 +1479,7 @@ if(ENABLE_STATIC)
   endif()
 endif()
 
+#[[
 install(TARGETS rdjpgcom wrjpgcom RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/README.ijg
@@ -1518,7 +1519,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/jconfig.h
   ${CMAKE_CURRENT_SOURCE_DIR}/jerror.h ${CMAKE_CURRENT_SOURCE_DIR}/jmorecfg.h
   ${CMAKE_CURRENT_SOURCE_DIR}/jpeglib.h
   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-
+  ]]
 include(cmakescripts/BuildPackages.cmake)
 
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmakescripts/cmake_uninstall.cmake.in"
